@@ -31,13 +31,15 @@ jobs:
           cache: maven
       - name: Custom Action Build
         uses: ./.github/actions/maven_build
+
       - name: Create Docker Image
         uses: ./.github/actions/docker_build
         with:
-          image_name: ${{env.docker_image_name}}
+          image_name: $docker_image_name
+          tag_name: $docker_tag_name
 
       - name: Save image On File
-        run: docker save -o academy.tar ${{env.docker_image_name}}:${{env.docker_tag_name}}
+        run: docker save -o "${{ env.docker_image_name }}.tar" $docker_image_name:$docker_tag_name
 
 
   coisa_build:
