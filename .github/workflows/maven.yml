@@ -40,4 +40,5 @@ jobs:
 
       steps:
         - run: docker image ls
+      needs: build
 
