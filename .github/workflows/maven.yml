@@ -34,13 +34,17 @@ jobs:
       - name: Create Docker Image
         uses: ./.github/actions/docker_build
         with:
-          image_name: $docker_image_name
+          image_name: ${{env.docker_image_name}}
+
+      - name: Save image On File
+        run: docker save -o academy.tar ${{env.docker_image_name}}:${{env.docker_tag_name}}
+
 
   coisa_build:
 
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
-        - run: docker image ls
-      needs: build
+    steps:
+      - run: docker image ls
+    needs: build
 
