@@ -13,7 +13,9 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+env:
+  docker_image_name: 'academy'
+  docker_tag_name: 'quack1'
 jobs:
   build:
 
@@ -32,7 +34,7 @@ jobs:
       - name: Create Docker Image
         uses: ./.github/actions/docker_build
         with:
-          image_name: 'quackofinalloo'
+          image_name: $docker_image_name
 
   coisa_build:
 
