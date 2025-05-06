@@ -16,6 +16,7 @@ on:
 env:
   docker_image_name: 'academy'
   docker_tag_name: 'quack1'
+  artifact_name: 'artifactoooooo'
 jobs:
   build:
 
@@ -41,12 +42,29 @@ jobs:
       - name: Save image On File
         run: docker save -o "${{ env.docker_image_name }}.tar" $docker_image_name:$docker_tag_name
 
+      - name: Upload File
+        uses: actions/upload-artifact@v4
+        with:
+          name: $artifact_name
+          path: ${{ env.docker_image_name }}.tar
+
 
   coisa_build:
 
     runs-on: ubuntu-latest
-
-    steps:
-      - run: docker image ls
     needs: build
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: $artifact_name
+
+      - name: Load Docker Image
+        run: docker load -i ${{ env.docker_image_name }}.tar
+
+      - name: List Images
+        run: docker image ls
+
+
+
 
