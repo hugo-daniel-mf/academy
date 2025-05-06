@@ -27,9 +27,10 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
+    - name: Custom Action Build
+      uses:  ./.github/actions/maven_build
     - name: Create Docker Image
       run: | 
         docker build . --file Dockerfile --tag academy:$(date +%s)
         docker image ls
+    
