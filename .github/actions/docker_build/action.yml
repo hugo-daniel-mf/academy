@@ -19,9 +19,9 @@ runs:
     - name: Create Docker Image
       run: |
         if [ -z "${{ inputs.tag_name }}" ]; then
-          export TAG=$(date +%s)
+            export TAG=$(date +%s)
         else
-          export TAG="${{ inputs.tag_name }}"
+            export TAG="${{ inputs.tag_name }}"
         fi
         docker build . --file ${{ inputs.path_dockerfile }} --tag ${{ inputs.image_name }}:$TAG
         docker image ls
