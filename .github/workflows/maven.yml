@@ -13,6 +13,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+
 env:
   docker_image_name: 'academy'
   docker_tag_name: 'quack1'
