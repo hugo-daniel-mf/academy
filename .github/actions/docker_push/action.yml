@@ -1,0 +1,17 @@
+name: Docker-Log-In
+inputs:
+  dockerhub_user:
+    description: "User Token"
+    required: true
+  image_ref:
+    description: "Image Ref"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Create Docker Image
+      run: |
+        docker tag "${{inputs.image_ref}}" "${{inputs.dockerhub_user}}/${{inputs.image_ref}}"
+        docker push "${{inputs.dockerhub_user}}/${{inputs.image_ref}}"
+      shell: bash
