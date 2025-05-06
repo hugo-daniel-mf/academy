@@ -31,5 +31,5 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Create Docker Image
       run: | 
-        docker build . --file [path_to_dockerfile] --tag academy:$(date +%s)
+        docker build . --file Dockerfile --tag academy:$(date +%s)
         docker image ls
