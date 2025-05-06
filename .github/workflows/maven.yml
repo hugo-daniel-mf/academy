@@ -20,17 +20,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'temurin'
-        cache: maven
-    - name: Custom Action Build
-      uses:  ./.github/actions/maven_build
-    - name: Create Docker Image
-      uses: ./.github/actions/docker_build
-      with:
-        image_name: 'quackofinalloo'
-    
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Custom Action Build
+        uses: ./.github/actions/maven_build
+      - name: Create Docker Image
+        uses: ./.github/actions/docker_build
+        with:
+          image_name: 'quackofinalloo'
+
+  coisa_build:
+
+      runs-on: ubuntu-latest
+
+      steps:
+        - run: docker image ls
+
