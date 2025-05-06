@@ -17,10 +17,10 @@ runs:
   using: composite
   steps:
     - run: |
-          if [ -z "${{ inputs.image_name }}: ${{ input-value }} " ]; then
+          if [ -z "${{ inputs.image_name }}" ]; then
             export TAG=$(date +%s)
           else
-            export TAG="${{ inputs.tag_name }}: ${{ input-value }} "
+            export TAG="${{ inputs.tag_name }}"
           fi
         docker build . --file Dockerfile --tag academy:$(date +%s)
         docker image ls
