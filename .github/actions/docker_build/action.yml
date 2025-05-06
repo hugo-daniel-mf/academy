@@ -16,12 +16,13 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: |
-          if [ -z "${{ inputs.image_name }}" ]; then
-            export TAG=$(date +%s)
-          else
-            export TAG="${{ inputs.tag_name }}"
-          fi
-        docker build . --file Dockerfile --tag academy:$(date +%s)
+    - name: Create Docker Image
+      run: |
+        if [ -z "${{ inputs.tag_name }}" ]; then
+          export TAG=$(date +%s)
+        else
+          export TAG="${{ inputs.tag_name }}"
+        fi
+        docker build . --file ${{ inputs.path_dockerfile }} --tag ${{inputs.image_name}}:$TAG
         docker image ls
       shell: bash
