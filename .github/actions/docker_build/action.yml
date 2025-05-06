@@ -1,14 +1,27 @@
-name: Replace-With-Your-Action-Name
+name: Required with no Default
 description: Replace-With-Your-Action-Description
 inputs:
-  replace_with_your_input_name:
-    description: "Replace-With-Your-Input-Description"
+  path_dockerfile:
+    description: "Path to Docker File"
     required: false
-    default: "Replace-With-Your-Input-Default-Value"
+    default: Dockerfile
+
+  image_name:
+    description: "Name for the DockerImage"
+    required: true
+
+  tag_name:
+    description: "Tag added to the final image"
+    required: false
 runs:
   using: composite
   steps:
     - run: |
+          if [ -z "${{ inputs.image_name }}: ${{ input-value }} " ]; then
+            export TAG=$(date +%s)
+          else
+            export TAG="${{ inputs.tag_name }}: ${{ input-value }} "
+          fi
         docker build . --file Dockerfile --tag academy:$(date +%s)
         docker image ls
       shell: bash
