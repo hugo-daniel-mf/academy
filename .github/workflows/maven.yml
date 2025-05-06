@@ -32,5 +32,5 @@ jobs:
     - name: Create Docker Image
       uses: ./.github/actions/docker_build
       with:
-        image_name: 'Quacko Finalo'
+        image_name: image_name
     
